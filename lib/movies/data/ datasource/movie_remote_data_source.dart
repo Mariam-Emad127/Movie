@@ -18,6 +18,8 @@ abstract class BaseMovieRemoteDataSource {
 
 
 class MovieRemoteDataSource extends BaseMovieRemoteDataSource{
+
+  /*
   Future<List<MovieModel>> getNowPlayingMovies()async{
     final response = await Dio().get( "https://api.themoviedb.org/3/movie/now_playing?api_key=adbe0eee9decdf37138e9e5fccac01c2" );
     final data=response.data;
@@ -30,10 +32,8 @@ try{
         movie.add(MovieModel.fromJson(item));
       }
 
-      return movie;
-//  return List<MovieModel>.from((response.data["results"] as List ).map((e) => MovieModel.fromJson
-
-   //));
+    //  return movie;
+//  return List<MovieModel>.from((response.data["results"] as List ).map((e) => MovieModel.fromJson  ));
 }catch(e){
   print(e);
   
@@ -47,28 +47,31 @@ try{
 //errorMessageModel: ErrorMessageModel.fromjson(response.data));}
 
 }
-
+*/
 
   @override
-  Future<dynamic> getMovieDetails()async {
-    final response=await Dio().get( ApiConstance.topRatedMoviesPath );
-
-    if(response==200){
-      return List<MovieModel>.from(( response.data["results"] as List).map((e) => MovieModel.fromJson));
-    }
-    else  {
-      throw ServerException(errorMessageModel:ErrorMessageModel.fromjson(response.data)) ;
-    }
+  Future<List<MovieModel>> getNowPlayingMovies() async {
+    final response = await Dio().get(ApiConstance.nowPlayingMoviesPath);
+    if (response.statusCode == 200) {
 
 
+ List<MovieModel> movie = [];
+  final data=response.data;
+      for (var item in data["results"]) {
+        movie.add(MovieModel.fromJson(item));
+      }
 
+      return movie;
+   //   return List<MovieModel>.from((response.data["results"] as List).map(  (e) => MovieModel.fromJson(e), ));
+    } else {
+ return List<MovieModel>.from(( response.data["results"] as List).map((e) => MovieModel.fromJson));    }
   }
 
 
   @override
   Future<List<MovieModel>> getPopularMovies() async{
    final response=await Dio().get( ApiConstance.popularMoviesPath);
-   
+   /*
    if(response==200){
      return List<MovieModel>.from(( response.data["results"] as List).map((e) => MovieModel.fromJson));
    }
@@ -79,6 +82,24 @@ try{
 
 
   }
+*/
+ if(response==200){
+ List<MovieModel> movie = [];
+  final data=response.data;
+      for (var item in data["results"]) {
+        movie.add(MovieModel.fromJson(item));
+      }
+
+      return movie;
+   //  return List<MovieModel>.from((response.data["results"] as List).map(  (e) => MovieModel.fromJson(e), ));
+    } else {
+       throw ServerException(errorMessageModel:ErrorMessageModel.fromjson(response.data)) ;
+   
+      
+      
+
+ //return List<MovieModel>.from(( response.data["results"] as List).map((e) => MovieModel.fromJson));    }
+  }}
 
   @override
   Future<List<MovieModel>> getTopRatedMovies() async {
@@ -94,5 +115,23 @@ try{
       );
     }
   }
+
+  @override
+  Future<dynamic> getMovieDetails()async {
+    final response=await Dio().get( ApiConstance.topRatedMoviesPath );
+
+    if(response==200){
+     
+      return List<MovieModel>.from(( response.data["results"] as List).map((e) => MovieModel.fromJson));
+    }
+    else  {
+      throw ServerException(errorMessageModel:ErrorMessageModel.fromjson(response.data)) ;
+    }
+
+  }
+
+
+
+
 
 }

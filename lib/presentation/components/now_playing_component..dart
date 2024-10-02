@@ -17,7 +17,7 @@ class NowPlayingComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MoviesBloc,MoviesState>(builder:(context,state) {
-      print(state.nowPlayingState);
+     // print(state.nowPlayingState);
     
 switch(state.nowPlayingState){
   case RequestState.loading:
@@ -43,8 +43,8 @@ switch(state.nowPlayingState){
           items:state.nowPlayingMovies.map(
           //moviesList.map(
                 (item) {
-                  print("kkkkkkkkkkkkkkkkkkkkkkk");
-              print(ApiConstance.imageUrl(item.backdropPath));
+               //   print("kkkkkkkkkkkkkkkkkkkkkkk");
+              //print(ApiConstance.imageUrl(item.backdropPath));
               return GestureDetector(
                 key: const Key('openMovieMinimalDetail'),
                 onTap: () {

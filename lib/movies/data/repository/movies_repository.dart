@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:movie/core/error/exceptions.dart';
 import 'package:movie/core/error/failure.dart';
 import 'package:movie/movies/data/%20datasource/movie_remote_data_source.dart';
-import 'package:movie/movies/data/entity/model/movie_model.dart';
 import 'package:movie/movies/domain/entities/movie.dart';
 
 import '../../domain/repository/base_movies_repository.dart';
@@ -12,7 +11,7 @@ class MoviesRepository extends BaseMoviesRepository {
   //final   BaseMoviesRepository baseMoviesRepository;
   final BaseMovieRemoteDataSource baseMovieRemoteDataSource;
   MoviesRepository(this.baseMovieRemoteDataSource );
-/*
+ 
    @override
   Future<Either<Failure, List<Movie>>> getNowPlayingMovies() async {
     final result = await baseMovieRemoteDataSource.getNowPlayingMovies();
@@ -24,8 +23,9 @@ class MoviesRepository extends BaseMoviesRepository {
     }
   }
   
-*/
+ 
 
+ /*
   Future< List<Movie>> getNowPlayingMovies() async {
 //  Future<Either<Failure, List<Movie>>> getNowPlayingMovies() async {
     final result = await baseMovieRemoteDataSource.getNowPlayingMovies();
@@ -39,10 +39,10 @@ return result;
     //on ServerException catch (failure) {
       //return Left(ServerFailure(failure.errorMessageModel.statusMessage));}
   }
-
+*/
   @override
   Future<Either<Failure, List<Movie>>> getPopularMovies()async {
-    final    result = await baseMovieRemoteDataSource.getPopularMovies ();
+    final result = await baseMovieRemoteDataSource.getPopularMovies ();
     try {
       return Right(result as List<Movie>);
     } on ServerException catch (failure) {

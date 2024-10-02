@@ -9,8 +9,8 @@ class GetNowPlayingMoviesUseCase{
   GetNowPlayingMoviesUseCase(this.baseMoviesRepository);
 
  //Future<List<Movie>>
- Future<List<Movie>>excute()async{
-//  Future<Either<Failure, List<Movie>>>excute()async{
+ //Future<List<Movie>>excute()async{
+ Future<Either<Failure, List<Movie>>>excute()async{
 
   return await baseMoviesRepository.getNowPlayingMovies();
 }

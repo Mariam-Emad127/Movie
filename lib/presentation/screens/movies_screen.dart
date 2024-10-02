@@ -1,40 +1,141 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+ import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart'; 
 import 'package:movie/core/services/services_locator.dart';
-import 'package:movie/movies/data/%20datasource/movie_remote_data_source.dart';
-import 'package:movie/movies/data/repository/movies_repository.dart';
-import 'package:movie/movies/domain/repository/base_movies_repository.dart';
-import 'package:movie/movies/domain/usecases/get_now_playing_movies_usecase.dart';
+import 'package:movie/presentation/components/now_playing_component..dart';
+import 'package:movie/presentation/components/popular_component.dart';
+import 'package:movie/presentation/components/top_rated_component.dart';
 import 'package:movie/presentation/controller/movies_bloc.dart';
 import 'package:movie/presentation/controller/movies_event.dart';
 import 'package:movie/presentation/controller/movies_state.dart';
+ 
 
-class MoviesScreen extends StatefulWidget {
+class MoviesScreen extends StatelessWidget {
   const MoviesScreen({super.key});
-
-  @override
-  State<MoviesScreen> createState() => _MoviesScreenState();
-}
-
-class _MoviesScreenState extends State<MoviesScreen> {
-  @override
+ 
   Widget build(BuildContext context) {
   
-    return BlocProvider( create:(BuildContext context) {
-  return sl <MoviesBloc>( )..add(GetNowPlayingMoviesEvent());},
+
+    return  BlocProvider( create:(BuildContext context) {
+      return sl <MoviesBloc>()
+        ..add(GetNowPlayingMoviesEvent())
+        //;},
+        //
+        ..add(GetPopularMoviesEvent());},
+        // ..add(GetTopRatedMoviesEvent());},
       child: BlocBuilder<MoviesBloc,MoviesState>(builder: (context,state){
-return Scaffold();
+ 
+
+
+      return Scaffold(
+        body: SingleChildScrollView(
+        key: const Key('movieScrollView'),
+        child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+         NowPlayingComponent(),
+          
+        Container(
+        margin: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
+        child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+        Text(
+        "Popular",
+        //style:
+        //GoogleFonts.poppins
+        style:
+        TextStyle(
+        fontSize: 19,
+        fontWeight: FontWeight.w500,
+        // letterSpacing: 0.15,
+        ),
+        
+        ),
+        InkWell(
+        onTap: () {
+        /// TODO : NAVIGATION TO POPULAR SCREEN
+        },
+        child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+        children: const [
+        Text('See More'),
+        Icon(
+        Icons.arrow_forward_ios,
+        size: 16.0,
+        )
+        ],
+        ),
+        ),
+        ),
+        ],
+        ),
+        ),
+        PopularComponent(),
+        Container(
+        margin: const EdgeInsets.fromLTRB(
+        16.0,
+        24.0,
+        16.0,
+        8.0,
+        ),
+        child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+        Text(
+        "Top Rated",
+        style:
+        //GoogleFonts.poppins
+        TextStyle
+        (
+        fontSize: 19,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.15,
+        ),
+        ),
+        InkWell(
+        onTap: () {
+        /// TODO : NAVIGATION TO Top Rated Movies Screen
+        },
+        child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+        children: const [
+        Text('See More'),
+        Icon(
+        Icons.arrow_forward_ios,
+        size: 16.0,
+        )
+        ],
+        ),
+        ),
+        ),
+        ],
+        ),
+        ),
+        TopRatedComponent(),
+        const SizedBox(height: 50.0),
+       
+        ],
+        ),
+        ),
+      );              
+
+
+
 
       }
-       )
-    );  
+      )
+    
+      );
+      
   }
 
 
 
 
 
-
+/*
 
 @override
   void initState() {
@@ -50,7 +151,7 @@ BaseMoviesRepository moviesRepository=MoviesRepository(baseMovieRemoteDataSource
   print(result);
 
   }
-
+*/
 }
 
 
