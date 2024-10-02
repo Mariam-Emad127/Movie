@@ -83,7 +83,7 @@ try{
 
   }
 */
- if(response==200){
+ if(response.statusCode==200){
  List<MovieModel> movie = [];
   final data=response.data;
       for (var item in data["results"]) {
@@ -93,12 +93,9 @@ try{
       return movie;
    //  return List<MovieModel>.from((response.data["results"] as List).map(  (e) => MovieModel.fromJson(e), ));
     } else {
-       throw ServerException(errorMessageModel:ErrorMessageModel.fromjson(response.data)) ;
-   
-      
-      
-
- //return List<MovieModel>.from(( response.data["results"] as List).map((e) => MovieModel.fromJson));    }
+     //  throw ServerException(errorMessageModel:ErrorMessageModel.fromjson(response.data)) ;
+ return List<MovieModel>.from(( response.data["results"] as List).map((e) => MovieModel.fromJson)); 
+ //   }
   }}
 
   @override

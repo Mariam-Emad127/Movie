@@ -40,6 +40,8 @@ return result;
       //return Left(ServerFailure(failure.errorMessageModel.statusMessage));}
   }
 */
+
+/*
   @override
   Future<Either<Failure, List<Movie>>> getPopularMovies()async {
     final result = await baseMovieRemoteDataSource.getPopularMovies ();
@@ -49,6 +51,21 @@ return result;
       return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
+
+*/
+
+   @override
+  Future<Either<Failure, List<Movie>>> getPopularMovies() async {
+    final result = await baseMovieRemoteDataSource.getPopularMovies();
+    try {
+      return Right(result as List<Movie>);
+    } on ServerException catch (failure) {
+      // return Left(ServerFailure(failure.error))
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
+    }
+  }
+  
+
 
   @override
   Future<Either<Failure, List<Movie>>> getTopRatedMovies() async{

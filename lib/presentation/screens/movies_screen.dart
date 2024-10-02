@@ -18,9 +18,8 @@ class MoviesScreen extends StatelessWidget {
     return  BlocProvider( create:(BuildContext context) {
       return sl <MoviesBloc>()
         ..add(GetNowPlayingMoviesEvent())
-        //;},
-        //
-        ..add(GetPopularMoviesEvent());},
+        ..add(GetPopularMoviesEvent())
+        ;},
         // ..add(GetTopRatedMoviesEvent());},
       child: BlocBuilder<MoviesBloc,MoviesState>(builder: (context,state){
  
@@ -32,7 +31,7 @@ class MoviesScreen extends StatelessWidget {
         child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-         NowPlayingComponent(),
+        NowPlayingComponent(),
           
         Container(
         margin: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),

@@ -1,14 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
- import 'package:flutter/material.dart';
+ import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:movie/presentation/controller/movies_bloc.dart';
 import 'package:movie/presentation/controller/movies_state.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../../core/network/api_constance.dart';
-import '../../core/utils/dummy.dart';
-class PopularComponent extends StatelessWidget {
+ class PopularComponent extends StatelessWidget {
   const PopularComponent({super.key});
 
   @override
@@ -18,6 +16,7 @@ class PopularComponent extends StatelessWidget {
     return  BlocBuilder<MoviesBloc,MoviesState>(
       builder: (context,state) {
         print(state.popularState);
+         
         return FadeIn(
           duration: const Duration(milliseconds: 500),
           child: SizedBox(

@@ -5,7 +5,6 @@ import 'package:movie/movies/domain/entities/movie.dart';
 class MoviesState extends Equatable {
 
 final List<Movie>nowPlayingMovies;
-//final List<MovieModel>nowPlayingMovies;
 final RequestState  nowPlayingState;
 final String message;
 final List<Movie> popularMovies;
@@ -13,27 +12,33 @@ final RequestState popularState;
 final String popularMessage; 
 
  const MoviesState( 
-  // this.movies,
+ 
    {  this.nowPlayingMovies=const[],    this.nowPlayingState=RequestState.loaded,    this.message='',
    this.popularMovies=const[], this.popularState=RequestState.loaded, this.popularMessage=""});
 
-/*
+ 
 MoviesState copyWith({
- List<Movie>? nowPlayingMovies,
+    List<Movie>? nowPlayingMovies,
     RequestState? nowPlayingState,
-    String? nowPlayingMessage,
-
+    String? message,
+    List<Movie>? popularMovies,
+    RequestState? popularState,
+    String? popularMessage,
 })
 
 
 {
 return MoviesState(
-  //nowPlayingMovies: nowPlayingMovies??this.nowPlayingMovies,
+  nowPlayingMovies: nowPlayingMovies??this.nowPlayingMovies,
    nowPlayingState: nowPlayingState ?? this.nowPlayingState,
+    message: message ?? this.message,
+      popularMovies: popularMovies ?? this.popularMovies,
+      popularState: popularState ?? this.popularState,
+      popularMessage: popularMessage ?? this.popularMessage,
 );
 }
 
-*/
+ 
 
   @override
   // TODO: implement props
