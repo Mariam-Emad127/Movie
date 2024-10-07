@@ -8,9 +8,7 @@ const MoviesEvent();
   List<Object?> get props => throw UnimplementedError();
 
 }
-class GetNowPlayingMoviesEvent extends MoviesEvent {
-
-}
+class GetNowPlayingMoviesEvent extends MoviesEvent {}
 
 class GetPopularMoviesEvent extends MoviesEvent {}
 

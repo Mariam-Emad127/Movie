@@ -1,4 +1,4 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; 
 import 'package:movie/core/services/services_locator.dart';
 import 'package:movie/presentation/components/now_playing_component..dart';
@@ -17,7 +17,7 @@ class MoviesScreen extends StatelessWidget {
 
     return  BlocProvider( create:(BuildContext context) {
       return sl <MoviesBloc>()
-        ..add(GetNowPlayingMoviesEvent())
+      ..add(GetNowPlayingMoviesEvent())
         ..add(GetPopularMoviesEvent())
         ;},
         // ..add(GetTopRatedMoviesEvent());},

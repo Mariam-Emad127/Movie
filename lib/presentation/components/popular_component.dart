@@ -14,6 +14,7 @@ import '../../core/network/api_constance.dart';
 
 
     return  BlocBuilder<MoviesBloc,MoviesState>(
+    //  buildWhen: (previous, current) =>previous.popularState != current.popularState ,
       builder: (context,state) {
         print(state.popularState);
          
@@ -41,7 +42,7 @@ import '../../core/network/api_constance.dart';
                       child: CachedNetworkImage(
                         width: 120.0,
                         fit: BoxFit.cover,
-                        imageUrl: ApiConstance.imageUrl(movie.backdropPath!),
+                        imageUrl: ApiConstance.imageUrl(movie.backdropPath),
                         placeholder: (context, url) => Shimmer.fromColors(
                           baseColor: Colors.grey[850]!,
                           highlightColor: Colors.grey[800]!,

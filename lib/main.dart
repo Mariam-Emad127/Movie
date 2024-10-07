@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
         theme: ThemeData.light(),
  
-      home: MoviesScreen(),
+      home: const MoviesScreen(),
     );
   }
 }

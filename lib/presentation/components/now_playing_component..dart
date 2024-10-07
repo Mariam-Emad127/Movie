@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:movie/core/utils/enum.dart';
 import 'package:movie/presentation/controller/movies_bloc.dart';
 import 'package:movie/presentation/controller/movies_state.dart';
-
 import '../../core/network/api_constance.dart';
  
 
@@ -16,7 +14,9 @@ class NowPlayingComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MoviesBloc,MoviesState>(builder:(context,state) {
+    return BlocBuilder<MoviesBloc,MoviesState>(      
+     // buildWhen: (previous, current) =>previous.nowPlayingState!=current.nowPlayingState ,
+      builder:(context,state) {
      // print(state.nowPlayingState);
     
 switch(state.nowPlayingState){
