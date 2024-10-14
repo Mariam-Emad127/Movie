@@ -14,9 +14,9 @@ class ErrorMessageModel extends Equatable {
   factory ErrorMessageModel.fromjson(Map<String,dynamic>json){
     return ErrorMessageModel(
       //statusCode:json["status_code"]  ,
-      statusCode: json["status_code"] != null ? json["status_code"] as int : 0,
-      statusMessage: json["status_message"] != null ? json["status_message"]as String :"",
-      success: json["success"] !=null  ?json["success"]as bool:false ,
+      statusCode: json["status_code"],// != null ? json["status_code"] as int : 0,
+      statusMessage: json["status_message"],// != null ? json["status_message"]as String :"",
+      success: json["success"]// !=null  ?json["success"]as bool:false ,
     );
 
   }

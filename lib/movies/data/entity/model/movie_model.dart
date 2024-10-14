@@ -33,7 +33,7 @@ class MovieModel extends Movie {
   });
 //Map<String, dynamic>
   factory MovieModel.fromJson(Map<String, dynamic>json) => MovieModel(
-        id: json["id"] as int?,
+        id: json["id"]  ,
         title: json["title"] as String?,
         //backdrop_path
         backdropPath: json["backdrop_path"] ,//as String,

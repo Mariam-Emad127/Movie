@@ -5,12 +5,12 @@ import 'package:movie/movies/domain/entities/movie.dart';
 
 import '../repository/base_movies_repository.dart';
 
-class GetPopularMoviesUseCase extends BaseUseCase<List<Movie>>  {
+class GetPopularMoviesUseCase extends BaseUseCase<List<Movie> >  {
   final BaseMoviesRepository baseMoviesRepository;
 
   GetPopularMoviesUseCase(this.baseMoviesRepository);
   @override
-  Future <Either<Failure, List<Movie>>> call( ) async {
+  Future <Either<Failure, List<Movie>>> call(  ) async {
      return await baseMoviesRepository.getPopularMovies();
    }
 }

@@ -19,7 +19,7 @@ void init(){
 sl.registerFactory(() => MoviesBloc(sl(),sl() ));
 sl.registerFactory(()=>MovieDetailsBloc(sl()));
 sl.registerLazySingleton<BaseMovieRemoteDataSource>(() => MovieRemoteDataSource(),);
-sl.registerLazySingleton<BaseMoviesRepository>(() => MoviesRepository(sl()));
+sl.registerLazySingleton<BaseMoviesRepository>(() => MoviesRepository(sl() ));
 sl.registerLazySingleton(() => GetNowPlayingMoviesUseCase(sl()));
 sl.registerLazySingleton(() => GetPopularMoviesUseCase(sl()));
 sl.registerLazySingleton(() => GetTopRatedMoviesUseCase(sl()));

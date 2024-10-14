@@ -6,6 +6,7 @@ import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:movie/core/utils/enum.dart';
 import 'package:movie/presentation/controller/movies_bloc.dart';
 import 'package:movie/presentation/controller/movies_state.dart';
+import 'package:movie/presentation/screens/movie_detail_screen.dart';
 import '../../core/network/api_constance.dart';
  
 
@@ -30,7 +31,8 @@ switch(state.nowPlayingState){
      
      case RequestState.loaded:
       
-      return FadeIn(
+      return 
+      FadeIn(
         duration: const Duration(milliseconds: 500),
         child: CarouselSlider(
           options: CarouselOptions(
@@ -43,14 +45,21 @@ switch(state.nowPlayingState){
           items:state.nowPlayingMovies.map(
           //moviesList.map(
                 (item) {
-               //   print("kkkkkkkkkkkkkkkkkkkkkkk");
-              //print(ApiConstance.imageUrl(item.backdropPath));
               return GestureDetector(
                 key: const Key('openMovieMinimalDetail'),
-                onTap: () {
-                  /// TODO : NAVIGATE TO MOVIE DETAILS
-                },
-
+                onTap: () =>
+                // {
+                   
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  MovieDetailScreen(
+                                id: item.id,
+                              ),
+                            ),
+                 
+                          ),
 
                 child: Stack(
                   children: [

@@ -5,13 +5,11 @@ import 'package:movie/core/error/failure.dart';
 import 'package:movie/movies/data/%20datasource/movie_remote_data_source.dart';
 import 'package:movie/movies/domain/entities/movie.dart';
 import 'package:movie/movies/domain/entities/movie_detail.dart';
-
-import '../../domain/repository/base_movies_repository.dart';
+ import '../../domain/repository/base_movies_repository.dart';
 
 class MoviesRepository extends BaseMoviesRepository {
-  //final   BaseMoviesRepository baseMoviesRepository;
-  final BaseMovieRemoteDataSource baseMovieRemoteDataSource;
-  MoviesRepository(this.baseMovieRemoteDataSource );
+   final BaseMovieRemoteDataSource baseMovieRemoteDataSource;
+  MoviesRepository(this.baseMovieRemoteDataSource  );
  
    @override
   Future<Either<Failure, List<Movie>>> getNowPlayingMovies() async {
@@ -50,11 +48,32 @@ class MoviesRepository extends BaseMoviesRepository {
       return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
-
+/*
+//final int imdbId;
+  
   @override
-  Future<Either<Failure, MovieDetail>> getMovieDetails() {
-    // TODO: implement getMovieDetails
-    throw UnimplementedError();
+  
+  Future<Either<Failure, MovieDetail>> getMovieDetails(id) async{
+ final result = await baseMovieRemoteDataSource.getMovieDetails(id);
+    try {
+      return Right(result );
+    } on ServerException catch (failure) {
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
+    }
   }
 
-}
+
+*/
+
+  @override
+  Future<Either<Failure, MovieDetail>> getMovieDetails
+ (imdbId) async {
+    final result = await baseMovieRemoteDataSource.getMovieDetails(imdbId);
+    try {
+      return Right(result);
+    } on ServerException catch (failure) {
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
+    }
+  }
+
+  }

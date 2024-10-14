@@ -1,8 +1,9 @@
+part of 'movie_details_bloc.dart';
 
-import 'package:equatable/equatable.dart';
-import 'package:movie/core/utils/enum.dart';
-import 'package:movie/movies/domain/entities/movie_detail.dart';
-//part 'movie_details_state.dart';
+//import 'package:equatable/equatable.dart';
+//import 'package:movie/core/utils/enum.dart';
+//import 'package:movie/movies/domain/entities/movie_detail.dart';
+
 
 class MoviesDetailsState extends Equatable {
 
@@ -10,7 +11,7 @@ class MoviesDetailsState extends Equatable {
   final RequestState movieDetailsState;
   final String movieDetailsMessage;
 
-  const MoviesDetailsState({this.movieDetail, this.movieDetailsState=RequestState.loaded, this.movieDetailsMessage=""});
+  const MoviesDetailsState({this.movieDetail, this.movieDetailsState=RequestState.loading , this.movieDetailsMessage=""});
  
 
 
