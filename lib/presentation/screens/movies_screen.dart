@@ -19,8 +19,8 @@ class MoviesScreen extends StatelessWidget {
       return sl <MoviesBloc>()
       ..add(GetNowPlayingMoviesEvent())
         ..add(GetPopularMoviesEvent())
-        ;},
-        // ..add(GetTopRatedMoviesEvent());},
+        //;},
+        ..add(GetTopRatedMoviesEvent());},
       child: BlocBuilder<MoviesBloc,MoviesState>(builder: (context,state){
  
 
@@ -112,7 +112,10 @@ class MoviesScreen extends StatelessWidget {
         ],
         ),
         ),
-        TopRatedComponent(),
+       TopRatedComponent(),
+       // PopularComponent(),
+        
+        
         const SizedBox(height: 50.0),
        
         ],

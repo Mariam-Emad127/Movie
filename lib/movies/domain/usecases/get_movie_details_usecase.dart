@@ -1,7 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
 import 'package:movie/core/error/failure.dart';
-import 'package:movie/core/usecase/base_usecase.dart';
 import 'package:movie/movies/domain/entities/movie_detail.dart';
 import 'package:movie/movies/domain/repository/base_movies_repository.dart';
 /*
@@ -20,9 +18,7 @@ class GetMovieDetailsUseCase
 }
 */
 
-class GetMovieDetailsUseCase
-    //extends BaseUseCase<MovieDetail, MovieDetailsParameters> 
-    {
+class GetMovieDetailsUseCase {
   final BaseMoviesRepository baseMoviesRepository;
 
   GetMovieDetailsUseCase(this.baseMoviesRepository);

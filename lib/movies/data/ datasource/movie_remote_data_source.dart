@@ -3,6 +3,7 @@ import 'package:movie/core/error/exceptions.dart';
 import 'package:movie/core/network/api_constance.dart';
 import 'package:movie/core/network/error_message_model.dart';
 import 'package:movie/movies/data/entity/movie_detail.dart';
+import 'package:movie/movies/data/entity/recommendation_model.dart';
  
 
 import '../entity/model/movie_model.dart';
@@ -12,7 +13,8 @@ abstract class BaseMovieRemoteDataSource {
   Future<List<MovieModel>> getPopularMovies();
   Future<List<MovieModel>> getTopRatedMovies();
   Future<MovieDetailModel> getMovieDetails(int movieId );
- 
+
+  Future<List<RecommendationModel>> getRecommendation( int moveId); 
 }
 
 
@@ -90,8 +92,8 @@ try{
       return movie;
    //  return List<MovieModel>.from((response.data["results"] as List).map(  (e) => MovieModel.fromJson(e), ));
     } else {
-     //  throw ServerException(errorMessageModel:ErrorMessageModel.fromjson(response.data)) ;
- return List<MovieModel>.from(( response.data["results"] as List).map((e) => MovieModel.fromJson)); 
+       throw ServerException(errorMessageModel:ErrorMessageModel.fromjson(response.data)) ;
+ //return List<MovieModel>.from(( response.data["results"] as List).map((e) => MovieModel.fromJson)); 
  //   }
   }}
   @override
@@ -123,6 +125,24 @@ try{
         errorMessageModel: ErrorMessageModel.fromjson(response.data),
       );
     }
+  }
+  
+  @override
+  Future<List< RecommendationModel>> getRecommendation(  id)async {
+   final response=await Dio().get(ApiConstance.recommendationPath(id));
+   if(response.statusCode==200){
+   
+   //return List<RecommendationModel>.from(response.data["result"]).map((e) => RecommendationModel.fromJson(e) );
+ return List<RecommendationModel>.from(
+          (response.data["results"] as List).map(
+        (e) => RecommendationModel.fromJson(e),
+      ));
+   }else{
+throw ServerException(
+        errorMessageModel: ErrorMessageModel.fromjson(response.data),
+      );
+
+   }
   }
 
 

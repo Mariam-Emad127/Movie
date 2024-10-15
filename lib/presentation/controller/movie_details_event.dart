@@ -1,7 +1,6 @@
 part of 'movie_details_bloc.dart';
 
-//import 'package:equatable/equatable.dart';
-
+ 
 abstract class MovieDetailEvent extends Equatable{
 
 const MovieDetailEvent();
@@ -13,6 +12,14 @@ final int id;
   GetMovieDetailsEvent(  this.id);
 
   @override
-  // TODO: implement props
-  List<Object?> get props =>  [id];
+   List<Object?> get props =>  [id];
 } 
+
+class GetMovieRecommendationEvent extends MovieDetailEvent {
+  final int id;
+
+  const GetMovieRecommendationEvent(this.id);
+
+  @override
+  List<Object> get props => [id];
+}

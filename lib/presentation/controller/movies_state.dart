@@ -10,11 +10,14 @@ final String message;
 final List<Movie> popularMovies;
 final RequestState popularState;
 final String popularMessage; 
-
- const MoviesState( 
+ final List<Movie> topRatedMovies;
+  final RequestState topRatedState;
+  final String topRatedMessage;
+ const MoviesState(
  
    {  this.nowPlayingMovies=const[],    this.nowPlayingState=RequestState.loaded,    this.message='',
-   this.popularMovies=const[], this.popularState=RequestState.loaded, this.popularMessage=""});
+   this.popularMovies=const[], this.popularState=RequestState.loaded, this.popularMessage="",
+   this.topRatedMovies=const[], this.topRatedState=RequestState.loading, this.topRatedMessage="",  });
 
  
 MoviesState copyWith({
@@ -24,6 +27,9 @@ MoviesState copyWith({
     List<Movie>? popularMovies,
     RequestState? popularState,
     String? popularMessage,
+        List<Movie>? topRatedMovies,
+    RequestState? topRatedState,
+    String? topRatedMessage,
 })
 
 
@@ -35,6 +41,9 @@ return MoviesState(
       popularMovies: popularMovies ?? this.popularMovies,
       popularState: popularState ?? this.popularState,
       popularMessage: popularMessage ?? this.popularMessage,
+       topRatedMovies: topRatedMovies ?? this.topRatedMovies,
+      topRatedState: topRatedState ?? this.topRatedState,
+      topRatedMessage: topRatedMessage ?? this.topRatedMessage,
 );
 }
 
@@ -42,5 +51,11 @@ return MoviesState(
 
   @override
   // TODO: implement props
-  List<Object?> get props => [nowPlayingMovies,nowPlayingState,message ];
+  List<Object?> get props => [nowPlayingMovies,nowPlayingState,message ,  
+        popularMovies,
+        popularState,
+        popularMessage,
+        topRatedMovies,
+        topRatedState,
+        topRatedMessage,];
 }

@@ -7,6 +7,7 @@ import 'package:movie/core/utils/enum.dart';
 import 'package:movie/movies/domain/entities/genres.dart'; 
 import 'package:movie/presentation/controller/movie_details_bloc.dart';
  import 'package:animate_do/animate_do.dart';
+import 'package:shimmer/shimmer.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   final int id;
@@ -15,7 +16,7 @@ class MovieDetailScreen extends StatelessWidget {
    @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>sl <MovieDetailsBloc>()..add(GetMovieDetailsEvent(id)),
+      create: (context) =>sl <MovieDetailsBloc>()..add(GetMovieDetailsEvent(id))..add(GetMovieRecommendationEvent(id)),
       child: Scaffold(
         body: MovieDetailContent(),
       ),
@@ -179,7 +180,7 @@ case RequestState.loaded:
             ),
           ),
       
-          /*
+          
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 24.0),
             sliver: SliverToBoxAdapter(
@@ -202,7 +203,7 @@ case RequestState.loaded:
             padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 24.0),
             sliver: _showRecommendations(),
           ),
-          */
+          
         ],
      
       );
@@ -238,135 +239,53 @@ String _showDuration(int runtime) {
     return '${minutes}m';
   }
 }
-/*
+
   Widget _showRecommendations() {
-    return SliverGrid(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          final recommendation = recommendations[index];
-          return FadeInUp(
-            from: 20,
-            duration: const Duration(milliseconds: 500),
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-              child: CachedNetworkImage(
-                imageUrl: ApiConstance.imageUrl(recommendation.backdropPath),
-                placeholder: (context, url) => Shimmer.fromColors(
-                  baseColor: Colors.grey[850]!,
-                  highlightColor: Colors.grey[800]!,
-                  child: Container(
-                    height: 170.0,
-                    width: 120.0,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                ),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
-                height: 180.0,
-                fit: BoxFit.cover,
-              ),
-            ),
-          );
-        },
-        childCount: recommendationDummy.length,
-      ),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        mainAxisSpacing: 8.0,
-        crossAxisSpacing: 8.0,
-        childAspectRatio: 0.7,
-        crossAxisCount: 3,
-      ),
-    );
-  }
-*/
-//}
+    return BlocBuilder<MovieDetailsBloc,MoviesDetailsState>(
+      builder: (BuildContext context, state) {  
 
-/*
-
-class MovieDetailScreen extends StatelessWidget {
-  final int id;
-
-  const MovieDetailScreen({Key? key, required this.id}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<MovieDetailsBloc>()
-        ..add(GetMovieDetailsEvent(id)),
-    // ..add(GetMovieRecommendationEvent(id)),
-      lazy: false,
-      child: const Scaffold(
-        body: MovieDetailContent(),
-      ),
-    );
-  }
-}
-
-class MovieDetailContent extends StatelessWidget {
-  const MovieDetailContent({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<MovieDetailsBloc, MoviesDetailsState>(
-      builder: (context, state) {
-        switch (state.movieDetailsState) {
-          case RequestState.loading:
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          case RequestState.loaded:
-            return CustomScrollView(
-              key: const Key('movieDetailScrollView'),
-              slivers: [
-                SliverAppBar(
-                  pinned: true,
-                  expandedHeight: 250.0,
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: FadeIn(
-                      duration: const Duration(milliseconds: 500),
-                      child: ShaderMask(
-                        shaderCallback: (rect) {
-                          return const LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Colors.transparent,
-                              Colors.black,
-                              Colors.black,
-                              Colors.transparent,
-                            ],
-                            stops: [0.0, 0.5, 1.0, 1.0],
-                          ).createShader(
-                            Rect.fromLTRB(0.0, 0.0, rect.width, rect.height),
-                          );
-                        },
-                        blendMode: BlendMode.dstIn,
-                        child: CachedNetworkImage(
-                          width: MediaQuery.of(context).size.width,
-                          imageUrl: ApiConstance.imageUrl(//""
-                              state.movieDetail!.backdropPath
-                              ),
-                          fit: BoxFit.cover,
-                        ),
+      return SliverGrid(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) {
+           final recommendation = state.recommendation[index];
+            return FadeInUp(
+              from: 20,
+              duration: const Duration(milliseconds: 500),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+                child: CachedNetworkImage(
+                  imageUrl: ApiConstance.imageUrl(recommendation.backdropPath!),
+                  placeholder: (context, url) => Shimmer.fromColors(
+                    baseColor: Colors.grey[850]!,
+                    highlightColor: Colors.grey[800]!,
+                    child: Container(
+                      height: 170.0,
+                      width: 120.0,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
                   ),
-                )
-       
-              ]
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  height: 180.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
             );
-      //  }
-   // );
-          case RequestState.error:
-         return Center(child: Text(state.movieDetailsMessage));
-        }
-      },
+          },
+          childCount: state.recommendation.length,
+        ),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          mainAxisSpacing: 8.0,
+          crossAxisSpacing: 8.0,
+          childAspectRatio: 0.7,
+          crossAxisCount: 3,
+        ),
+      );
+      }
     );
   }
 
-}
- */      
+ 
+ 
